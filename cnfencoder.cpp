@@ -61,6 +61,7 @@ void addCNF4va(int k){
   str += ("cnf");
   str += (" ");
   str += std::to_string(k);
+  cnf.push_back(str);
 }
 
 
@@ -69,7 +70,8 @@ void cnfencoder(int x,int y,int k,int adjacency[][200]){
   //int x,y,k;
   //int adjacency[k][k];
   int count=1;
-  std::ofstream outputfile("input.txt");
+  std::fstream outputfile("input.dimacs",std::ios::out);
+  if(outputfile.fail()) std::cout<<"file open faild"<<std::endl;
   std::vector<int> cons;
   //adjacency[1][2] = 1;
   //adjacency[2][3] = 1;
@@ -87,6 +89,8 @@ void cnfencoder(int x,int y,int k,int adjacency[][200]){
       }
     }
   }
+
+  addCNF4va(k);
 
   for(int i=0;i<k;i++){
     for(int j=0;j<y;j++){
@@ -145,7 +149,7 @@ void cnfencoder(int x,int y,int k,int adjacency[][200]){
 
   outputfile.close();
 
-  execl("./glueminisat-simp","input.dimacs","output");
+  //execl("./glueminisat-simp","input.dimacs","output",NULL);
 
 }
 
@@ -155,12 +159,35 @@ int main(){
   int y=3;
   int k=8;
   int adjacency[200][200];
-  adjacency[1][2]=1;
+  int temp;
+  int count=0;
+  adjacency[0][2]=1;
   adjacency[2][3]=1;
 
   cnfencoder(x,y,k,adjacency);
 
+  std::fstream ifs("output",std::ios::in);
+  if(ifs.fail()) std::cout<<"file open failed"<<std::endl;
+  std::string str;
+  std::vector<std::string> result_str;
+  std::vector<int> result_int;
 
+  while(!ifs.eof()){
+    ifs>>str;
+    if(str!="SAT"){
+    temp = std::stoi(str);
+    std::cout<<temp<<std::endl;
+    if(temp>0){
+    result_int.push_back(temp);
+    }
+    }
+  }
+
+  std::cout<<std::endl;
+
+  for(auto e:result_int){
+    std::cout<<e<<std::endl;
+  }
 
   return 0;
 }
