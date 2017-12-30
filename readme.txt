@@ -1,21 +1,4 @@
-======================================================================
-
-                      GlueMiniSat 2.2.8 (dev120)
-
-      Hidetomo NABESHIMA *1,  Koji IWANUMA *1,  Katsumi INOUE *2
-
-                *1 University of Yamanashi, JAPAN
-               {nabesima,iwanuma}@yamanashi.ac.jp
-
-           *2 National Institute of Informatics, JAPAN
-                          inoue@nii.ac.jp
-
-======================================================================
-
-(1) BUILDING
-
-   ./build.sh
-
-(2) RUNNING
-
-   ./binary/glueminisat-simp BENCHNAME
+NN制約を満たす量子回路の設計プログラムである。
+main.cppは入力の量子回路をNN制約を満たす量子回路に設計するプログラムである。
+cnfencoder.cppはSATsolverに入力する制約を作成するプログラムである。
+Astar.cppは部分回路間の量子ビットを再配置するプログラムである。
