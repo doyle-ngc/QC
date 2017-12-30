@@ -98,7 +98,7 @@ void addCNF4va(int k){
 }
 
 
-void cnfencoder(int x,int y,int k,int adjacency[200][200]){
+void cnfencoder(int x,int y,int k,int adjacency[][200]){
 
   //int x,y,k;
   //int adjacency[k][k];
